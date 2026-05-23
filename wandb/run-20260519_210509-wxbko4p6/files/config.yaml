@@ -1,0 +1,53 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            fp4tuqwgw4j2hzygnfosm14qr308f2qr:
+                codePath: train_local.py
+                codePathLocal: train_local.py
+                cpu_count: 6
+                cpu_count_logical: 12
+                cudaVersion: "12.1"
+                disk:
+                    /:
+                        total: "126074482688"
+                        used: "10790895616"
+                email: tranqui240703+ai@gmail.com
+                executable: D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\Scripts\python.exe
+                git:
+                    commit: ebee431a63ed831fe954490ce6f606474ffb80d3
+                    remote: https://github.com/TranQui24/AI-SYSTEM-FOR-UTERINE-ULTRASOUND-IMAGE-ANALYSIS-AND-ABNORMALITY-DETECTION.git
+                gpu: NVIDIA GeForce GTX 1650
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      cudaCores: 896
+                      memoryTotal: "4294967296"
+                      name: NVIDIA GeForce GTX 1650
+                      uuid: GPU-c900b7d2-3474-8c84-2584-c247c88c58f6
+                host: tdq
+                memory:
+                    total: "16558006272"
+                os: Windows-10-10.0.26200-SP0
+                program: D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\train_local.py
+                python: CPython 3.10.11
+                root: D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection
+                startedAt: "2026-05-19T14:05:09.476527Z"
+                writerId: fp4tuqwgw4j2hzygnfosm14qr308f2qr
+        m: []
+        python_version: 3.10.11
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+            "4": 3.10.11
+            "5": 0.27.0
+            "8":
+                - 3
+            "12": 0.27.0
+            "13": windows-amd64

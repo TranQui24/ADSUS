@@ -1,0 +1,1081 @@
+Ultralytics 8.4.51  Python-3.10.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA GeForce GTX 1650, 4096MiB)
+[34m[1mengine\trainer: [0magnostic_nms=False, amp=True, angle=1.0, augment=False, auto_augment=randaugment, batch=16, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, cls_pw=0.0, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=data.yaml, degrees=0.0, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, end2end=None, epochs=100, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=224, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.0001, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolov8n.pt, momentum=0.937, mosaic=1.0, multi_scale=0.0, name=Standard_3Ch_Execution-2, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=15, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=D:/AI_Data/training_runs, rect=False, resume=False, retina_masks=False, rle=1.0, save=True, save_conf=False, save_crop=False, save_dir=D:\AI_Data\training_runs\Standard_3Ch_Execution-2, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=0, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=2, workspace=None
+[KDownloading https://ultralytics.com/assets/Arial.ttf to 'C:\Users\quyka\AppData\Roaming\Ultralytics\Arial.ttf': 100% ━━━━━━━━━━━━ 755.1KB 871.8KB/s 0.9s 0.8s<0.0s
+Overriding model.yaml nc=80 with nc=1
+
+                   from  n    params  module                                       arguments
+  0                  -1  1       464  ultralytics.nn.modules.conv.Conv             [3, 16, 3, 2]
+  1                  -1  1      4672  ultralytics.nn.modules.conv.Conv             [16, 32, 3, 2]
+  2                  -1  1      7360  ultralytics.nn.modules.block.C2f             [32, 32, 1, True]
+  3                  -1  1     18560  ultralytics.nn.modules.conv.Conv             [32, 64, 3, 2]
+  4                  -1  2     49664  ultralytics.nn.modules.block.C2f             [64, 64, 2, True]
+  5                  -1  1     73984  ultralytics.nn.modules.conv.Conv             [64, 128, 3, 2]
+  6                  -1  2    197632  ultralytics.nn.modules.block.C2f             [128, 128, 2, True]
+  7                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]
+  8                  -1  1    460288  ultralytics.nn.modules.block.C2f             [256, 256, 1, True]
+  9                  -1  1    164608  ultralytics.nn.modules.block.SPPF            [256, 256, 5]
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 12                  -1  1    148224  ultralytics.nn.modules.block.C2f             [384, 128, 1]
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 15                  -1  1     37248  ultralytics.nn.modules.block.C2f             [192, 64, 1]
+ 16                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 18                  -1  1    123648  ultralytics.nn.modules.block.C2f             [192, 128, 1]
+ 19                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 21                  -1  1    493056  ultralytics.nn.modules.block.C2f             [384, 256, 1]
+ 22        [15, 18, 21]  1    751507  ultralytics.nn.modules.head.Detect           [1, 16, None, [64, 128, 256]]
+Model summary: 130 layers, 3,011,043 parameters, 3,011,027 gradients, 8.2 GFLOPs
+
+Transferred 319/355 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+WARNING [34m[1mAMP: [0mchecks failed . AMP training on NVIDIA GeForce GTX 1650 GPU may cause NaN losses or zero-mAP results, so AMP will be disabled during training.
+[34m[1mtrain: [0mFast image access  (ping: 0.40.2 ms, read: 16.82.1 MB/s, size: 160.9 KB)
+[K[34m[1mtrain: [0mScanning D:\AI_Data\labels... 0 images, 871 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 871/871 635.8it/s 1.4s<0.0s
+WARNING [34m[1mtrain: [0mNo labels found in D:\AI_Data\labels.cache. See https://docs.ultralytics.com/datasets for dataset formatting guidance.
+[34m[1mtrain: [0mNew cache created: D:\AI_Data\labels.cache
+WARNING Labels are missing or empty in D:\AI_Data\labels.cache, training may not work correctly. See https://docs.ultralytics.com/datasets for dataset formatting guidance.
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 172.989.0 MB/s, size: 141.2 KB)
+[K[34m[1mval: [0mScanning D:\AI_Data\labels.cache... 0 images, 871 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 871/871  0.0s
+WARNING Labels are missing or empty in D:\AI_Data\labels.cache, training may not work correctly. See https://docs.ultralytics.com/datasets for dataset formatting guidance.
+[34m[1moptimizer:[0m AdamW(lr=0.0001, momentum=0.937) with parameter groups 57 weight(decay=0.0), 64 weight(decay=0.0005), 63 bias(decay=0.0)
+Plotting labels to D:\AI_Data\training_runs\Standard_3Ch_Execution-2\labels.jpg...
+WARNING zero-size array to reduction operation maximum which has no identity
+Image sizes 224 train, 224 val
+Using 2 dataloader workers
+Logging results to [1mD:\AI_Data\training_runs\Standard_3Ch_Execution-2[0m
+Starting training for 100 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      1/100     0.537G          0      1.066          0          0        224: 100% ━━━━━━━━━━━━ 55/55 5.1it/s 10.8s<0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.2it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      2/100     0.631G          0   0.001286          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.4it/s 4.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 21.3it/s 1.3s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      3/100     0.631G          0  0.0007541          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.9it/s 3.9s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 21.8it/s 1.3s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      4/100     0.633G          0  0.0007391          0          0        224: 100% ━━━━━━━━━━━━ 55/55 14.2it/s 3.9s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 21.4it/s 1.3s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      5/100     0.633G          0  0.0007341          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.8it/s 4.0s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.2it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      6/100     0.633G          0  0.0007276          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.6it/s 4.0s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.3it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      7/100     0.633G          0  0.0007128          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.7it/s 4.0s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.6it/s 1.4s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      8/100     0.633G          0  0.0006772          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.1it/s 4.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.5it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K      9/100     0.633G          0  0.0006129          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.4it/s 4.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.8it/s 1.3s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     10/100     0.633G          0  0.0005274          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.0it/s 4.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.4it/s 1.4s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     11/100     0.633G          0  0.0004546          0          0        224: 100% ━━━━━━━━━━━━ 55/55 13.0it/s 4.2s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.4it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     12/100     0.633G          0  0.0004121          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.6it/s 4.4s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.9it/s 1.4s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     13/100     0.633G          0  0.0003899          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.9it/s 4.3s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.9it/s 1.3s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     14/100     0.633G          0  0.0003809          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.7it/s 4.3s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.5it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     15/100     0.633G          0  0.0003761          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.7it/s 4.3s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.0it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     16/100     0.633G          0  0.0003738          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.5it/s 5.8s0.1ss
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 13.3it/s 2.1s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     17/100     0.633G          0  0.0003719          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.3it/s 4.9s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.4it/s 1.4s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     18/100     0.633G          0  0.0003717          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.5it/s 4.8s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.0it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     19/100     0.633G          0  0.0003712          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.8it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     20/100     0.633G          0  0.0003704          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.0it/s 5.0s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.2it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     21/100     0.633G          0  0.0003702          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.3it/s 4.5s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.5it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     22/100     0.633G          0  0.0003701          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.8it/s 4.3s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.6it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     23/100     0.633G          0    0.00037          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.3it/s 4.5s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.2it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     24/100     0.633G          0    0.00037          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.1it/s 4.6s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.8it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     25/100     0.633G          0    0.00037          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.6it/s 4.4s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.4it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     26/100     0.633G          0    0.00037          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.5it/s 4.4s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.0it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     27/100     0.633G          0    0.00037          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.5it/s 4.4s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.2it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     28/100     0.633G          0  0.0003699          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.2it/s 4.5s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.7it/s 1.4s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     29/100     0.633G          0  0.0003698          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.5it/s 4.4s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.0it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     30/100     0.633G          0  0.0003698          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.3it/s 4.5s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.5it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     31/100     0.633G          0  0.0003699          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.0it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.6it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     32/100     0.633G          0  0.0003699          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.2it/s 4.5s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.1it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     33/100     0.633G          0  0.0003698          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.0it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     34/100     0.633G          0  0.0003699          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.2it/s 4.5s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.9it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     35/100     0.633G          0  0.0003696          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.4it/s 5.3s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.3it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     36/100     0.633G          0  0.0003695          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.4it/s 5.3s.1ss
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 14.5it/s 1.9s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     37/100     0.633G          0  0.0003698          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.3it/s 5.9s<0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.4it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     38/100     0.633G          0  0.0003696          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.8it/s 5.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 15.4it/s 1.8s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     39/100     0.633G          0  0.0003693          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.1it/s 5.5s.2ss
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 13.2it/s 2.1s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     40/100     0.633G          0  0.0003695          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.1it/s 6.1s<0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.4it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     41/100     0.633G          0  0.0003693          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.4it/s 5.9s<0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.4it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     42/100     0.633G          0  0.0003688          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.5it/s 5.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.7it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     43/100     0.633G          0  0.0003687          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.1s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.7it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     44/100     0.633G          0  0.0003678          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.1it/s 4.5s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.9it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     45/100     0.633G          0  0.0003665          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.0it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.1it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     46/100     0.633G          0  0.0003632          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.0it/s 4.6s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.5it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     47/100     0.633G          0  0.0003558          0          0        224: 100% ━━━━━━━━━━━━ 55/55 12.0it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.8it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     48/100     0.633G          0  0.0003399          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.8it/s 4.7s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.4it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     49/100     0.633G          0   0.000309          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.8it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.5it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     50/100     0.633G          0   0.000252          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.7it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     51/100     0.633G          0  0.0001892          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.9it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.6it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     52/100     0.633G          0  0.0001289          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.8it/s 4.7s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.5it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     53/100     0.633G          0  8.564e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.9it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.4it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     54/100     0.633G          0  5.199e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.8it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     55/100     0.633G          0   4.09e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.7it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     56/100     0.633G          0  2.978e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.6it/s 4.8s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.5it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     57/100     0.633G          0  2.134e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.9it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.8it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     58/100     0.633G          0  2.152e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.6it/s 4.8s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.7it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     59/100     0.633G          0  1.866e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.4it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     60/100     0.633G          0  1.348e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.5it/s 4.8s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 20.1it/s 1.4s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     61/100     0.633G          0  1.238e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.6it/s 4.8s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.7it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     62/100     0.633G          0   1.04e-05          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.5it/s 4.8s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.8it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     63/100     0.633G          0  8.774e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 19.2it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     64/100     0.633G          0  7.863e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.2it/s 5.4s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.0it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     65/100     0.633G          0  7.309e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.8it/s 5.6s0.1ss
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 15.0it/s 1.9s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     66/100     0.633G          0  6.208e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.3it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     67/100     0.633G          0  5.289e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.6it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.2it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     68/100     0.633G          0  4.439e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.4it/s 4.8s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.2it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     69/100     0.633G          0  4.968e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.2it/s 4.9s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.9it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     70/100     0.633G          0  4.101e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.7it/s 4.7s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.3it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     71/100     0.633G          0  3.728e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.6it/s 4.7s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.6it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     72/100     0.633G          0  2.783e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.3it/s 4.9s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.8it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     73/100     0.633G          0  2.332e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.9it/s 4.6s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 15.1it/s 1.9s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     74/100     0.633G          0  2.618e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 7.7it/s 7.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 11.4it/s 2.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     75/100     0.633G          0  2.653e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.2it/s 6.0s<0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.8it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     76/100     0.633G          0  2.618e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.7it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     77/100     0.633G          0  1.829e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.6it/s 5.2s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.6it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     78/100     0.633G          0  1.422e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.6it/s 5.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.5it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     79/100     0.633G          0  1.613e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.5it/s 5.3s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.1it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     80/100     0.633G          0  1.916e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.1it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     81/100     0.633G          0  1.413e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.4it/s 4.8s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 14.1it/s 2.0s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     82/100     0.633G          0  1.118e-06          0          0        224: 100% ━━━━━━━━━━━━ 55/55 8.3it/s 6.6s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 15.4it/s 1.8s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     83/100     0.633G          0  9.884e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.4it/s 5.3s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.4it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     84/100     0.633G          0  6.936e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.1it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     85/100     0.633G          0  9.797e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.8it/s 5.1s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 18.5it/s 1.5s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     86/100     0.633G          0  8.843e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.8it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     87/100     0.633G          0  9.623e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.9it/s 5.0s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.3it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     88/100     0.633G          0  7.023e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.5it/s 5.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.0it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     89/100     0.633G          0  6.242e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.4it/s 5.3s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.7it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     90/100     0.633G          0  7.109e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.6it/s 5.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.5it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     91/100     0.633G          0  3.641e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.9it/s 5.1s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.8it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     92/100     0.633G          0  9.277e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.2it/s 4.9s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.6it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     93/100     0.633G          0  5.635e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 11.3it/s 4.9s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.4it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     94/100     0.633G          0  7.283e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 9.1it/s 6.0s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 13.5it/s 2.1s0.2s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     95/100     0.633G          0  5.115e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 8.7it/s 6.3s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.1it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     96/100     0.633G          0  6.069e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.9it/s 5.0s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 17.3it/s 1.6s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     97/100     0.633G          0  3.728e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.9it/s 5.0s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.4it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     98/100     0.633G          0  3.555e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.8it/s 5.1s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.0it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K     99/100     0.633G          0  3.034e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.7it/s 5.1s0.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 15.3it/s 1.8s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K    100/100     0.633G          0  3.815e-07          0          0        224: 100% ━━━━━━━━━━━━ 55/55 10.5it/s 5.2s0.1s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.6it/s 1.7s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+
+100 epochs completed in 0.200 hours.
+Optimizer stripped from D:\AI_Data\training_runs\Standard_3Ch_Execution-2\weights\last.pt, 6.2MB
+Optimizer stripped from D:\AI_Data\training_runs\Standard_3Ch_Execution-2\weights\best.pt, 6.2MB
+
+Validating D:\AI_Data\training_runs\Standard_3Ch_Execution-2\weights\best.pt...
+Ultralytics 8.4.51  Python-3.10.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA GeForce GTX 1650, 4096MiB)
+Model summary (fused): 73 layers, 3,005,843 parameters, 0 gradients, 8.1 GFLOPs
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 28/28 16.0it/s 1.8s0.1s
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:657: RuntimeWarning: Mean of empty slice.
+  ax.plot(px, py.mean(1), linewidth=3, color="blue", label=f"all classes {ap[:, 0].mean():.3f} mAP@0.5")
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:145: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:703: RuntimeWarning: Mean of empty slice.
+  y = smooth(py.mean(0), 0.1)
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:703: RuntimeWarning: Mean of empty slice.
+  y = smooth(py.mean(0), 0.1)
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:703: RuntimeWarning: Mean of empty slice.
+  y = smooth(py.mean(0), 0.1)
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\numpy\_core\_methods.py:137: RuntimeWarning: invalid value encountered in divide
+  ret = um.true_divide(
+D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\metrics.py:839: RuntimeWarning: Mean of empty slice.
+  i = smooth(f1_curve.mean(0), 0.1).argmax()  # max F1 index
+                   all        871          0          0          0          0          0
+WARNING no labels found in detect set, cannot compute metrics without labels
+Speed: 0.1ms preprocess, 1.0ms inference, 0.0ms loss, 0.2ms postprocess per image
+Results saved to [1mD:\AI_Data\training_runs\Standard_3Ch_Execution-2[0m

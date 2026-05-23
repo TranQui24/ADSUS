@@ -1,0 +1,40 @@
+{
+  "os": "Windows-10-10.0.26200-SP0",
+  "python": "CPython 3.10.11",
+  "startedAt": "2026-05-19T13:44:24.783459Z",
+  "program": "D:\\Code_for_set\\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\\train_local.py",
+  "codePath": "train_local.py",
+  "codePathLocal": "train_local.py",
+  "git": {
+    "remote": "https://github.com/TranQui24/AI-SYSTEM-FOR-UTERINE-ULTRASOUND-IMAGE-ANALYSIS-AND-ABNORMALITY-DETECTION.git",
+    "commit": "ebee431a63ed831fe954490ce6f606474ffb80d3"
+  },
+  "email": "tranqui240703+ai@gmail.com",
+  "root": "D:\\Code_for_set\\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection",
+  "host": "tdq",
+  "executable": "D:\\Code_for_set\\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\\env_yolo\\Scripts\\python.exe",
+  "cpu_count": 6,
+  "cpu_count_logical": 12,
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "126074482688",
+      "used": "10790756352"
+    }
+  },
+  "memory": {
+    "total": "16558006272"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce GTX 1650",
+      "memoryTotal": "4294967296",
+      "cudaCores": 896,
+      "architecture": "Turing",
+      "uuid": "GPU-c900b7d2-3474-8c84-2584-c247c88c58f6"
+    }
+  ],
+  "cudaVersion": "12.1",
+  "writerId": "kc3uf8uzsj63g5ucc6h6dbd695ada5dn"
+}

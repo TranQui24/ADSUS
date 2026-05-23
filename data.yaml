@@ -1,0 +1,6 @@
+path: D:/AI_Data
+train: train
+val: val
+
+names:
+  0: Fibroid

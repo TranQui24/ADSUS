@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\train_local.py", line 120, in <module>
+    main()
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\train_local.py", line 107, in main
+    project=os.path.join(data_base_dir, "training_runs"),
+NameError: name 'data_base_dir' is not defined
