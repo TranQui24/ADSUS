@@ -2,7 +2,7 @@ import os
 from ultralytics import YOLO
 
 def run_manual_inference():
-    model_path = r"D:\AI_Data\training_runs\Small_416_Augmented_Execution\weights\best.pt"
+    model_path = r"D:\AI_Data\training_runs\Small_416_Augmented\weights\best.pt"
 
     test_images_dir = r"D:\AI_Data\test"
 
