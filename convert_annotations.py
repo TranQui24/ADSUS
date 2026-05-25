@@ -3,8 +3,7 @@ import shutil
 import random
 
 def main():
-    # 1. Định nghĩa đường dẫn nguồn và đích
-    # Thay đường dẫn này bằng thư mục hiện tại đang chứa 871 ảnh và 871 xml của bạn
+
     source_dir = r"D:\AI_Data\all_data_raw"  
     output_base = r"D:\AI_Data"
     
@@ -15,12 +14,12 @@ def main():
     os.makedirs(train_dir, exist_ok=True)
     os.makedirs(val_dir, exist_ok=True)
     
-    # 2. Quét và tìm các tệp xml có sẵn
+
     all_files = os.listdir(source_dir)
     xml_files = [f for f in all_files if f.lower().endswith('.xml')]
     
     valid_pairs = []
-    # Định dạng đuôi ảnh phổ biến (hệ thống tự khớp đuôi thực tế)
+
     image_extensions = ['.jpg', '.jpeg', '.png', '.bmp', '.JPG', '.PNG']
     
     for xml_file in xml_files:
@@ -44,15 +43,13 @@ def main():
         print("Lỗi: Số lượng cặp dữ liệu ít hơn 171, không thể phân tách tập val.")
         return
 
-    # 3. Xáo trộn ngẫu nhiên để đảm bảo tính khách quan của dữ liệu
-    random.seed(42) # Cố định seed để có kết quả đồng nhất nếu chạy lại
+    random.seed(42) # 
     random.shuffle(valid_pairs)
     
-    # Tách chính xác 171 cặp cho tập kiểm thử (val)
+  
     val_pairs = valid_pairs[:171]
     train_pairs = valid_pairs[171:]
-    
-    # 4. Thực hiện sao chép tệp vào các thư mục tương ứng
+ 
     print("Đang sao chép dữ liệu vào thư mục tập kiểm thử (val)...")
     for img, xml in val_pairs:
         shutil.copy(os.path.join(source_dir, img), os.path.join(val_dir, img))
