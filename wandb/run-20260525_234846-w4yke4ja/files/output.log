@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\train_local.py", line 121, in <module>
+    main()
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\train_local.py", line 98, in main
+    model = YOLO("yolov11s.pt")
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\models\yolo\model.py", line 76, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\engine\model.py", line 144, in __init__
+    self._load(model, task=task)
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\engine\model.py", line 283, in _load
+    self.model, self.ckpt = load_checkpoint(weights)
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\nn\tasks.py", line 1537, in load_checkpoint
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\nn\tasks.py", line 1466, in torch_safe_load
+    ckpt = _load()
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\nn\tasks.py", line 1463, in _load
+    return torch_load(file, map_location="cpu")
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\ultralytics\utils\patches.py", line 181, in torch_load
+    return torch.load(*args, **kwargs)
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\torch\serialization.py", line 1319, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\torch\serialization.py", line 659, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\torch\serialization.py", line 640, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: 'yolov11s.pt'

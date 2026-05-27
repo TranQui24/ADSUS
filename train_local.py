@@ -95,7 +95,7 @@ def main():
         name="YOLOv11s_416_Augmented_Execution"
     )
     
-    model = YOLO("yolov11s.pt")
+    model = YOLO("yolo11s.pt")
     
     model.train(
         data="data.yaml",                    

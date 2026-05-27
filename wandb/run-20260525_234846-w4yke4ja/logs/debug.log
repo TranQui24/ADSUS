@@ -1,0 +1,36 @@
+2026-05-25 23:48:46,377 INFO    MainThread:380 [wandb_setup.py:_flush():81] Current SDK version is 0.27.0
+2026-05-25 23:48:46,377 INFO    MainThread:380 [wandb_setup.py:_flush():81] Configure stats pid to 380
+2026-05-25 23:48:46,377 INFO    MainThread:380 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-05-25 23:48:46,377 INFO    MainThread:380 [wandb_init.py:setup_run_log_directory():723] Logging user logs to D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\wandb\run-20260525_234846-w4yke4ja\logs\debug.log
+2026-05-25 23:48:46,378 INFO    MainThread:380 [wandb_init.py:setup_run_log_directory():724] Logging internal logs to D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\wandb\run-20260525_234846-w4yke4ja\logs\debug-internal.log
+2026-05-25 23:48:46,378 INFO    MainThread:380 [wandb_init.py:init():851] calling init triggers
+2026-05-25 23:48:46,378 INFO    MainThread:380 [wandb_init.py:init():856] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2026-05-25 23:48:46,378 INFO    MainThread:380 [wandb_init.py:init():899] starting backend
+2026-05-25 23:48:51,136 INFO    MainThread:380 [wandb_init.py:init():914] sending inform_init request
+2026-05-25 23:48:54,016 INFO    MainThread:380 [wandb_init.py:init():919] backend started and connected
+2026-05-25 23:48:54,017 INFO    MainThread:380 [wandb_init.py:init():989] updated telemetry
+2026-05-25 23:48:54,110 INFO    MainThread:380 [wandb_init.py:init():1012] communicating run to backend with 90.0 second timeout
+2026-05-25 23:48:54,521 INFO    MainThread:380 [wandb_init.py:init():1057] starting run threads in backend
+2026-05-25 23:48:55,522 INFO    MainThread:380 [wandb_run.py:_console_start():2509] atexit reg
+2026-05-25 23:48:55,523 INFO    MainThread:380 [wandb_run.py:_redirect():2359] redirect: wrap_raw
+2026-05-25 23:48:55,523 INFO    MainThread:380 [wandb_run.py:_redirect():2428] Wrapping output streams.
+2026-05-25 23:48:55,523 INFO    MainThread:380 [wandb_run.py:_redirect():2451] Redirects installed.
+2026-05-25 23:48:55,532 INFO    MainThread:380 [wandb_init.py:init():1095] run started, returning control to user process
+2026-05-25 23:48:56,219 INFO    wandb-AsyncioManager-main:380 [service_client.py:_forward_responses():122] Reached EOF.
+2026-05-25 23:48:56,220 INFO    wandb-AsyncioManager-main:380 [mailbox.py:close():154] Closing mailbox, abandoning 1 handles.
+2026-05-25 23:48:57,700 ERROR   wandb-AsyncioManager-main:380 [asyncio_manager.py:fn_wrap_exceptions():184] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 182, in fn_wrap_exceptions
+    await fn()
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "D:\Code_for_set\Ai_system_for_uterine_ultrasound_image_analysis_and_abmormality_detection\env_yolo\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Users\quyka\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 371, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\quyka\AppData\Local\Programs\Python\Python310\lib\asyncio\streams.py", line 167, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost

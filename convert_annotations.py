@@ -9,8 +9,6 @@ def main():
     
     train_dir = os.path.join(output_base, "train")
     val_dir = os.path.join(output_base, "val")
-    
-    # Tạo các thư mục đích nếu chưa tồn tại
     os.makedirs(train_dir, exist_ok=True)
     os.makedirs(val_dir, exist_ok=True)
     
@@ -24,8 +22,7 @@ def main():
     
     for xml_file in xml_files:
         base_name = os.path.splitext(xml_file)[0]
-        
-        # Tìm tệp ảnh trùng tên tương ứng
+
         image_file = None
         for ext in image_extensions:
             potenial_img = base_name + ext
