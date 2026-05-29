@@ -1,0 +1,20 @@
+Ultralytics 8.4.53  Python-3.10.11 torch-2.12.0+cpu
+Traceback (most recent call last):
+  File "D:\Code_for_set\ADSUS\train_local.py", line 121, in <module>
+    main()
+  File "D:\Code_for_set\ADSUS\train_local.py", line 100, in main
+    model.train(
+  File "C:\Users\quyka\AppData\Local\Programs\Python\Python310\lib\site-packages\ultralytics\engine\model.py", line 783, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+  File "C:\Users\quyka\AppData\Local\Programs\Python\Python310\lib\site-packages\ultralytics\models\yolo\detect\train.py", line 63, in __init__
+    super().__init__(cfg, overrides, _callbacks)
+  File "C:\Users\quyka\AppData\Local\Programs\Python\Python310\lib\site-packages\ultralytics\engine\trainer.py", line 128, in __init__
+    self.device = select_device(self.args.device)
+  File "C:\Users\quyka\AppData\Local\Programs\Python\Python310\lib\site-packages\ultralytics\utils\torch_utils.py", line 231, in select_device
+    raise ValueError(
+ValueError: Invalid CUDA 'device=0' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.
+
+torch.cuda.is_available(): False
+torch.cuda.device_count(): 0
+os.environ['CUDA_VISIBLE_DEVICES']: None
+See https://pytorch.org/get-started/locally/ for up-to-date torch install instructions if no CUDA devices are seen by torch.

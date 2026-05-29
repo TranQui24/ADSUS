@@ -1,0 +1,53 @@
+_wandb:
+    value:
+        cli_version: 0.27.0
+        e:
+            ag7yki3jlklqwu96fuxat911g4quv85w:
+                codePath: train_local.py
+                codePathLocal: train_local.py
+                cpu_count: 6
+                cpu_count_logical: 12
+                cudaVersion: "12.1"
+                disk:
+                    /:
+                        total: "126074482688"
+                        used: "15045079040"
+                email: tranqui240703+ai@gmail.com
+                executable: D:\Code_for_set\ADSUS\env_yolo\Scripts\python.exe
+                git:
+                    commit: 068e33d1fe3b5d7f1fcfdf3e33e0cef50db97f6b
+                    remote: https://github.com/TranQui24/AI-SYSTEM-FOR-UTERINE-ULTRASOUND-IMAGE-ANALYSIS-AND-ABNORMALITY-DETECTION.git
+                gpu: NVIDIA GeForce GTX 1650
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      cudaCores: 896
+                      memoryTotal: "4294967296"
+                      name: NVIDIA GeForce GTX 1650
+                      uuid: GPU-c900b7d2-3474-8c84-2584-c247c88c58f6
+                host: tdq
+                memory:
+                    total: "16558006272"
+                os: Windows-10-10.0.26200-SP0
+                program: D:\Code_for_set\ADSUS\train_local.py
+                python: CPython 3.10.11
+                root: D:\Code_for_set\ADSUS
+                startedAt: "2026-05-27T09:59:23.950703Z"
+                writerId: ag7yki3jlklqwu96fuxat911g4quv85w
+        m: []
+        python_version: 3.10.11
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+            "4": 3.10.11
+            "5": 0.27.0
+            "8":
+                - 3
+            "12": 0.27.0
+            "13": windows-amd64

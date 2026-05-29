@@ -79,17 +79,17 @@ def create_side_by_side_comparison(gt_dir, pred_dir, output_dir):
     print(f"[+] Thu muc ket qua: {output_dir}")
 
 if __name__ == '__main__':
-    MODEL_PATH = r"D:\AI_Data\training_runs\YoLov11_Small_416_Augmented\weights\best.pt"
+    MODEL_PATH = r"D:\AI_Data\training_runs\YoLov11_Small_416_Augmented2\weights\best.pt"
     # TEST_IMAGES_DIR = r"D:\AI_Data\test"
     # PROJECT_DIR = r"D:\AI_Data\test_manual\yolov11small"
-    # PREDICT_NAME = "try_with_110_normal_picture"
+    # PREDICT_NAME = "2nd_train"
     
     # GT_DIR = r"D:\AI_Data\test_visualized_ground_truth"
-    # OUTPUT_DIR = r"D:\AI_Data\yolov11s_rs"
+    # OUTPUT_DIR = r"D:\AI_Data\yolov11s_rs2"
 
-    TEST_IMAGES_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture"
+    TEST_IMAGES_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture\test_rs"
     PROJECT_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture"
-    PREDICT_NAME = "train_none_capiler_result"
+    PREDICT_NAME = "train_have_capiler_result"
     
     GT_DIR = r"D:\AI_Data\test_visualized_ground_truth"
     OUTPUT_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture\final"
