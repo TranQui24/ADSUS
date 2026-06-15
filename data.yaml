@@ -3,4 +3,5 @@ train: train
 val: val
 
 names:
-  0: Fibroid
+  0: abnormal
+  1: caliper

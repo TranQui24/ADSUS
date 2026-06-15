@@ -79,20 +79,62 @@ def create_side_by_side_comparison(gt_dir, pred_dir, output_dir):
     print(f"[+] Thu muc ket qua: {output_dir}")
 
 if __name__ == '__main__':
-    MODEL_PATH = r"D:\AI_Data\training_runs\YoLov11_Small_416_Augmented2\weights\best.pt"
-    # TEST_IMAGES_DIR = r"D:\AI_Data\test"
-    # PROJECT_DIR = r"D:\AI_Data\test_manual\yolov11small"
-    # PREDICT_NAME = "2nd_train"
-    
-    # GT_DIR = r"D:\AI_Data\test_visualized_ground_truth"
-    # OUTPUT_DIR = r"D:\AI_Data\yolov11s_rs2"
+    import tkinter as tk
+    from tkinter import filedialog, simpledialog, messagebox
 
-    TEST_IMAGES_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture\test_rs"
-    PROJECT_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture"
-    PREDICT_NAME = "train_have_capiler_result"
-    
+    # Khoi tao cua so tkinter an di
+    root = tk.Tk()
+    root.withdraw()
+    root.attributes('-topmost', True)
+
+    # --- Model path giu nguyen, it thay doi ---
+    MODEL_PATH = r"D:\AI_Data\training_runs\YoLov11_Small_416_Augmented2\weights\best.pt"
+
+    # --- Chon folder anh test ---
+    print("[?] Chon thu muc anh TEST...")
+    TEST_IMAGES_DIR = filedialog.askdirectory(title="Chon thu muc anh TEST (TEST_IMAGES_DIR)")
+    if not TEST_IMAGES_DIR:
+        messagebox.showerror("Loi", "Chua chon thu muc anh test. Thoat.")
+        exit()
+
+    # --- Chon PROJECT folder (noi luu ket qua predict) ---
+    print("[?] Chon thu muc PROJECT (noi YOLO luu ket qua predict)...")
+    PROJECT_DIR = filedialog.askdirectory(title="Chon thu muc PROJECT (PROJECT_DIR)")
+    if not PROJECT_DIR:
+        messagebox.showerror("Loi", "Chua chon thu muc project. Thoat.")
+        exit()
+
+    # --- Nhap ten sub-folder ket qua predict ---
+    PREDICT_NAME = simpledialog.askstring(
+        title="Ten ket qua predict",
+        prompt="Nhap ten thu muc con luu ket qua (PREDICT_NAME):",
+        initialvalue="predict_result",
+        parent=root
+    )
+    if not PREDICT_NAME:
+        messagebox.showerror("Loi", "Chua nhap ten ket qua. Thoat.")
+        exit()
+
+    # --- Ground Truth co dinh, khong thay doi ---
     GT_DIR = r"D:\AI_Data\test_visualized_ground_truth"
-    OUTPUT_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture\final"
+
+    # --- Chon folder OUTPUT cuoi cung ---
+    print("[?] Chon thu muc OUTPUT (luu anh so sanh cuoi cung)...")
+    OUTPUT_DIR = filedialog.askdirectory(title="Chon thu muc OUTPUT ket qua cuoi (OUTPUT_DIR)")
+    if not OUTPUT_DIR:
+        messagebox.showerror("Loi", "Chua chon thu muc output. Thoat.")
+        exit()
+
+    root.destroy()
+
+    # --- In lai cau hinh da chon ---
+    print("\n[*] Cau hinh da chon:")
+    print(f"    MODEL_PATH    : {MODEL_PATH}")
+    print(f"    TEST_IMAGES   : {TEST_IMAGES_DIR}")
+    print(f"    PROJECT_DIR   : {PROJECT_DIR}")
+    print(f"    PREDICT_NAME  : {PREDICT_NAME}")
+    print(f"    GT_DIR        : {GT_DIR}")
+    print(f"    OUTPUT_DIR    : {OUTPUT_DIR}\n")
 
     print("[*] Bat dau chay suy luan mo hinh...")
     pred_dir = run_manual_inference(MODEL_PATH, TEST_IMAGES_DIR, PROJECT_DIR, PREDICT_NAME)

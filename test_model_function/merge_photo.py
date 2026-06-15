@@ -35,7 +35,7 @@ def create_side_by_side_comparison(gt_dir, pred_dir, output_dir):
 
         cv2.putText(header_gt, "GROUND TRUTH (Bac si khoanh)", (10, 35), 
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-        cv2.putText(header_pred, "AI PREDICTION (YOLOv8)", (10, 35), 
+        cv2.putText(header_pred, "AI PREDICTION (YOLO)", (10, 35), 
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
 
         img_gt_with_header = cv2.vconcat([header_gt, img_gt])
@@ -54,11 +54,11 @@ def create_side_by_side_comparison(gt_dir, pred_dir, output_dir):
 
 if __name__ == '__main__':
 
-    GT_DIR = r"D:\AI_Data\test_visualized_ground_truth" 
+    GT_DIR = r"D:\Data\Data_hospital\Final Data" 
     
 
-    PRED_DIR = r"D:\AI_Data\inference_results\test_87_images" 
+    PRED_DIR = r"D:\Data\Data_hospital\Test_Yolo\Yolo_detect\predict_result" 
 
-    OUTPUT_DIR = r"D:\AI_Data\test_comparison_side_by_side" 
+    OUTPUT_DIR = r"D:\Data\Data_hospital\Test_Yolo\Merge" 
     
     create_side_by_side_comparison(GT_DIR, PRED_DIR, OUTPUT_DIR)
