@@ -88,7 +88,8 @@ if __name__ == '__main__':
     root.attributes('-topmost', True)
 
     # --- Model path giu nguyen, it thay doi ---
-    MODEL_PATH = r"D:\AI_Data\training_runs\YoLov11_Small_416_Augmented2\weights\best.pt"
+    print("[?] Chon thu muc anh best...")
+    MODEL_PATH = filedialog.askopenfilename(title="Chon file best (best_dir)")
 
     # --- Chon folder anh test ---
     print("[?] Chon thu muc anh TEST...")

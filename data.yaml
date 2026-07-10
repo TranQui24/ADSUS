@@ -1,7 +1,7 @@
 path: D:/AI_Data
 train: train
 val: val
+test: test    
 
 names:
   0: abnormal
-  1: caliper

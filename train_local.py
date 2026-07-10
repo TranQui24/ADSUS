@@ -18,13 +18,16 @@ def main():
         epochs=200,                          # Tăng từ 150 → 200 để bù batch nhỏ hơn
         batch=4,                             # Giảm từ 8 → 4 để tránh OOM với imgsz=512
         nbs=8,                               # Nominal batch size: scale lr như batch=8
-        imgsz=512,                           # Tăng từ 416 → 512 (bội số 32, chi tiết hơn)
+        imgsz=512,                          
         device=0,
         workers=2,
         optimizer='AdamW',
         lr0=1e-4,
         patience=30,                         # Tăng từ 20 → 30 tương ứng epochs nhiều hơn
 
+
+
+        cls=1.0,    
         # --- Regularization (thay thế dropout, phù hợp dataset nhỏ 800 ảnh) ---
         weight_decay=0.001,                  # L2 regularization, chống overfit
         label_smoothing=0.1,                 # Giảm overfit nhãn cứng

@@ -69,7 +69,7 @@ def process_batch_dir(input_dir, marker_x_path, marker_plus_path, output_dir):
     count = 0
     for img_name in all_files:
         bg_path = os.path.join(input_dir, img_name)
-        output_path = os.path.join(output_dir, f"caliper_{img_name}")
+        output_path = os.path.join(output_dir, f"{img_name}")
         
         success = paste_calipers_on_normal(bg_path, marker_x_path, marker_plus_path, output_path)
         if success:
@@ -79,8 +79,25 @@ def process_batch_dir(input_dir, marker_x_path, marker_plus_path, output_dir):
     print(f"[+] Thu muc ket qua: {output_dir}")
 
 if __name__ == '__main__':
-    INPUT_NORMAL_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\origin_picture"
-    MARKER_X = r'D:\AI_Data\Process_caliper\cut_caliper\caliperx.png'
+    import tkinter as tk
+    from tkinter import filedialog, messagebox
+
+    MARKER_X    = r'D:\AI_Data\Process_caliper\cut_caliper\caliperx.png'
     MARKER_PLUS = r'D:\AI_Data\Process_caliper\cut_caliper\caliper+.png'
-    OUTPUT_DIR = r"D:\AI_Data\Process_caliper\insert_caliper\result_picture"
+
+    root = tk.Tk()
+    root.withdraw()
+
+    print(">>> Hay chon folder INPUT (thu muc anh goc)...")
+    INPUT_NORMAL_DIR = filedialog.askdirectory(title="Chon thu muc anh goc (input)")
+    if not INPUT_NORMAL_DIR:
+        messagebox.showwarning("Huy", "Chua chon thu muc input. Chuong trinh se ket thuc.")
+        raise SystemExit
+
+    print(">>> Hay chon folder OUTPUT (thu muc luu ket qua)...")
+    OUTPUT_DIR = filedialog.askdirectory(title="Chon thu muc luu ket qua (output)")
+    if not OUTPUT_DIR:
+        messagebox.showwarning("Huy", "Chua chon thu muc output. Chuong trinh se ket thuc.")
+        raise SystemExit
+
     process_batch_dir(INPUT_NORMAL_DIR, MARKER_X, MARKER_PLUS, OUTPUT_DIR)
