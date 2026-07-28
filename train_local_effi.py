@@ -4,44 +4,50 @@ from ultralytics import settings, YOLO
 from ultralytics.utils.metrics import DetMetrics
 
 os.environ["WANDB_ENTITY"] = "set-g64"
-os.environ["WANDB_PROJECT"] = "ADSUS" 
+os.environ["WANDB_PROJECT"] = "ADSUS"
 
-# 1. Định nghĩa hàm fitness mới dựa trên DetMetrics
+# 1. Custom fitness (giữ nguyên từ bản gốc)
 def custom_fitness(self):
-    """
-    self.mean_results() trả về mảng [Precision, Recall, mAP50, mAP50-95]
-    Trọng số w = [0.0, 0.6, 0.4, 0.0] -> 0.6 * Recall + 0.4 * mAP50
-    """
+
     w = np.array([0.0, 0.6, 0.4, 0.0])
     results = np.array(self.mean_results())
     return (results * w).sum()
 
-# 2. Ghi đè thuộc tính fitness của DetMetrics
 DetMetrics.fitness = property(custom_fitness)
+
 
 def main():
     data_base_dir = r"D:\AI_Data"
     settings.update({"wandb": True})
 
-    model = YOLO("yolo26s.pt")
+    model = YOLO("yolo26-effnet.yaml")
+
+    backbone_layer = model.model.model[0] 
+    frozen_params = 0
+    for i, sub in enumerate(backbone_layer.m):
+        if i < 4:
+            for p in sub.parameters():
+                p.requires_grad = False
+                frozen_params += p.numel()
+    print(f"Frozen {frozen_params:,} params in backbone stages 0-3")
 
     model.train(
         data="data.yaml",
         project=os.path.join(data_base_dir, "ADSUS"),
-        name="YOLO26s_512_Execution_CustomFitness_nonPatience",
+        name="YOLO26_EffNetV2S_512",
         epochs=200,
         batch=4,
-        nbs=8,
-        imgsz=512,
+        nbs=16,          
+        imgsz=512,       
         device=0,
         workers=2,
         optimizer='AdamW',
         lr0=1e-4,
-        #patience=30,
+        amp=True,         
+        patience=50,
         cls=1.0,
         weight_decay=0.001,
-        label_smoothing=0.1,
-        freeze=10,
+        label_smoothing=0.1,     
         degrees=15.0,
         flipud=0.5,
         fliplr=0.5,
@@ -51,6 +57,7 @@ def main():
         hsv_v=0.4,
         erasing=0.1,
     )
+
 
 if __name__ == '__main__':
     main()

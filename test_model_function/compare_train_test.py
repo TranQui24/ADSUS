@@ -49,19 +49,19 @@ def pick_folder(title):
 
 def pick_all_paths():
     """
-    Hỏi người dùng lần lượt 4 mục cần thiết.
+    Hỏi người dùng lần lượt 3 mục cần thiết.
     data.yaml được cố định — không cần chọn.
-    Trả về (best_pt, results_csv, custom_folder, output_dir) hoặc None nếu huỷ.
+    Trả về (best_pt, results_csv, output_dir) hoặc None nếu huỷ.
     """
     print("=" * 60)
-    print("  COMPARE TRAIN vs VAL vs TEST vs CUSTOM — Chọn file/thư mục")
+    print("  COMPARE TRAIN vs TEST — Chọn file/thư mục")
     print("=" * 60)
     print(f"  data.yaml : {DATA_YAML}  (cố định)")
 
     # 1. best.pt
-    print("\n[1/4] Chọn file best.pt ...")
+    print("\n[1/3] Chọn file best.pt ...")
     best_pt = pick_file(
-        "1/4 — Chọn file best.pt (weights)",
+        "1/3 — Chọn file best.pt (weights)",
         filetypes=[("PyTorch weights", "*.pt"), ("All files", "*.*")],
     )
     if not best_pt:
@@ -69,31 +69,24 @@ def pick_all_paths():
     print(f"  best.pt   : {best_pt}")
 
     # 2. results.csv
-    print("\n[2/4] Chọn file results.csv từ lần train ...")
+    print("\n[2/3] Chọn file results.csv từ lần train ...")
     results_csv = pick_file(
-        "2/4 — Chọn file results.csv (training log)",
+        "2/3 — Chọn file results.csv (training log)",
         filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
     )
     if not results_csv:
         print("  → Đã huỷ."); return None
     print(f"  results   : {results_csv}")
 
-    # 3. Custom folder (folder ảnh ngoài)
-    print("\n[3/4] Chọn thư mục ảnh ngoài (custom folder) để đánh giá thêm ...")
-    custom_folder = pick_folder("3/4 — Chọn thư mục ảnh ngoài (custom dataset folder)")
-    if not custom_folder:
-        print("  → Đã huỷ."); return None
-    print(f"  custom    : {custom_folder}")
-
-    # 4. output dir
-    print("\n[4/4] Chọn thư mục lưu kết quả ...")
-    output_dir = pick_folder("4/4 — Chọn thư mục lưu kết quả")
+    # 3. output dir
+    print("\n[3/3] Chọn thư mục lưu kết quả ...")
+    output_dir = pick_folder("3/3 — Chọn thư mục lưu kết quả")
     if not output_dir:
         print("  → Đã huỷ."); return None
     print(f"  output    : {output_dir}")
     print()
 
-    return best_pt, results_csv, custom_folder, output_dir
+    return best_pt, results_csv, output_dir
 
 
 # ─────────────────────────────────────────────
@@ -146,86 +139,6 @@ def run_val_eval(best_pt, data_yaml, output_dir):
 def run_test_eval(best_pt, data_yaml, output_dir):
     """Đánh giá best.pt trên TEST split, chỉ class 0."""
     return _run_eval(best_pt, data_yaml, "test", output_dir)
-
-
-def run_custom_eval(best_pt, custom_folder, output_dir):
-    """
-    Đánh giá best.pt trên folder ảnh ngoài (không thuộc data.yaml).
-    Tạo data_custom_temp.yaml tạm trỏ vào custom_folder rồi chạy model.val().
-
-    Cấu trúc folder được hỗ trợ:
-      - Có subfolder images/ và labels/  →  dùng images/ làm nguồn
-      - Không có subfolder images/       →  dùng thẳng custom_folder
-
-    LƯU Ý: KHÔNG đặt key "path" trong yaml để tránh Ultralytics
-    tự ghép path + val → sai đường dẫn tuyệt đối.
-    """
-    from ultralytics import YOLO
-    import yaml as pyyaml
-
-    print(f"\n[►] Đang chạy evaluation trên CUSTOM FOLDER (class 0 only) ...")
-    print(f"    Folder: {custom_folder}")
-
-    model = YOLO(str(best_pt))
-
-    # Xác định đường dẫn ảnh (tuyệt đối, dùng forward slash cho Ultralytics)
-    images_path = custom_folder / "images"
-    if not images_path.exists():
-        images_path = custom_folder
-    images_str = images_path.as_posix()  # forward slash, tránh lỗi Windows path
-
-    # Tìm labels/ tương ứng
-    labels_path = custom_folder / "labels"
-    if not labels_path.exists():
-        labels_path = None
-
-    # Đọc class names từ data.yaml gốc
-    with open(DATA_YAML, "r", encoding="utf-8") as f:
-        orig_yaml = pyyaml.safe_load(f)
-    nc    = orig_yaml.get("nc", 1)
-    names = orig_yaml.get("names", ["object"])
-
-    # Tạo data_custom_temp.yaml — KHÔNG có key "path" để Ultralytics
-    # dùng thẳng đường dẫn tuyệt đối trong "val" mà không ghép thêm
-    temp_yaml_path = output_dir / "data_custom_temp.yaml"
-    temp_data = {
-        "train": images_str,
-        "val":   images_str,
-        "test":  images_str,
-        "nc":    nc,
-        "names": names,
-    }
-    with open(temp_yaml_path, "w", encoding="utf-8") as f:
-        pyyaml.dump(temp_data, f, allow_unicode=True, default_flow_style=False)
-
-    print(f"    Đường dẫn ảnh  : {images_str}")
-    print(f"    Đường dẫn label: {labels_path or '(tự tìm bên cạnh images/)'}")
-    print(f"    Dùng yaml tạm  : {temp_yaml_path}")
-
-    metrics = model.val(
-        data=str(temp_yaml_path),
-        split="val",
-        classes=[0],
-        save_json=False,
-    )
-
-    result = {
-        "precision": float(metrics.box.mp),
-        "recall":    float(metrics.box.mr),
-        "mAP50":     float(metrics.box.map50),
-        "mAP50-95":  float(metrics.box.map),
-        "fitness":   float(metrics.fitness) if hasattr(metrics, "fitness") else None,
-    }
-
-    json_path = output_dir / "custom_metrics_class0.json"
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(result, f, indent=2, ensure_ascii=False)
-
-    print(f"\n=== KẾT QUẢ TRÊN CUSTOM FOLDER (class 0) ===")
-    for k, v in result.items():
-        print(f"  {k:<12}: {v}")
-
-    return result
 
 
 # ─────────────────────────────────────────────
@@ -309,17 +222,15 @@ def load_train_val_summary(results_csv):
 # BƯỚC 3: BẢNG SO SÁNH
 # ─────────────────────────────────────────────
 
-def build_comparison_table(val_metrics, test_metrics, custom_metrics, custom_folder, output_dir):
+def build_comparison_table(val_metrics, test_metrics, output_dir):
     """
-    Tạo bảng so sánh Val vs Test vs Custom Folder — cả 3 dùng best.pt, chỉ class 0.
+    Tạo bảng so sánh Val vs Test — cả hai đều dùng best.pt, chỉ class 0.
     Lưu CSV.
     """
     keys = ("precision", "recall", "mAP50", "mAP50-95")
-    custom_label = f"Custom ({custom_folder.name} | best.pt | class 0)"
     rows = [
-        {"split": "Val    (best.pt | class 0)", **{k: val_metrics[k]    for k in keys}},
-        {"split": "Test   (best.pt | class 0)", **{k: test_metrics[k]   for k in keys}},
-        {"split": custom_label,                 **{k: custom_metrics[k] for k in keys}},
+        {"split": "Val  (best.pt | class 0)", **{k: val_metrics[k]  for k in keys}},
+        {"split": "Test (best.pt | class 0)", **{k: test_metrics[k] for k in keys}},
     ]
 
     comp_df = pd.DataFrame(rows)
@@ -338,64 +249,49 @@ def _fmt(v):
     return f"{v:.3f}" if v is not None else "N/A"
 
 
-def plot_comparison(df_curve, val_metrics, test_metrics, custom_metrics, custom_folder, output_dir):
-    """Vẽ 6 biểu đồ: mAP50, mAP50-95, cls/box/dfl loss, bar chart tổng quan 3 cột."""
+def plot_comparison(df_curve, val_metrics, test_metrics, output_dir):
+    """Vẽ 5 biểu đồ: mAP50, mAP50-95, cls/box/dfl loss, bar chart tổng quan."""
     cols = df_curve.columns
     epochs = df_curve.get("epoch", pd.RangeIndex(len(df_curve)))
 
-    custom_name = custom_folder.name  # Tên ngắn của folder ngoài
-
     # Màu sắc nhất quán
-    C_VAL    = "#1D9E75"
-    C_TEST   = "#D85A30"
-    C_CUSTOM = "#9B59B6"   # Tím — phân biệt rõ với Val và Test
-    C_TRAIN  = "#378ADD"
-    C_GRID   = "#888888"
+    C_VAL   = "#1D9E75"
+    C_TEST  = "#D85A30"
+    C_TRAIN = "#378ADD"
+    C_GRID  = "#888888"
 
-    fig = plt.figure(figsize=(18, 10))
-    fig.suptitle(
-        f"So sánh Train / Val / Test / Custom({custom_name}) — YOLO  [Báo cáo: class 0]",
-        fontsize=14, fontweight="bold", y=0.98
-    )
+    fig = plt.figure(figsize=(16, 10))
+    fig.suptitle("So sánh Train / Val / Test — YOLO  [Báo cáo: class 0]", fontsize=15, fontweight="bold", y=0.98)
 
-    gs = gridspec.GridSpec(2, 3, figure=fig, hspace=0.42, wspace=0.38)
+    gs = gridspec.GridSpec(2, 3, figure=fig, hspace=0.42, wspace=0.35)
 
     # ── 1. mAP50 ──────────────────────────────────────────────
     ax1 = fig.add_subplot(gs[0, 0])
     map50_col = _find_col(cols, _COL_CANDIDATES["mAP50"])
     if map50_col:
-        ax1.plot(epochs, df_curve[map50_col], color=C_VAL, linewidth=1.4,
-                 label="Val mAP50 (curve từ CSV)")
-    # Đường ngang: val best.pt (eval lại) — màu xanh đậm hơn, nét đứt
+        ax1.plot(epochs, df_curve[map50_col], color=C_VAL, label="Val mAP50 (epoch)")
+    ax1.axhline(test_metrics["mAP50"], color=C_TEST, linestyle="--",
+                label=f"Test mAP50 = {_fmt(test_metrics['mAP50'])} (class 0)")
     best_map50 = val_metrics["mAP50"]
     if best_map50:
-        ax1.axhline(best_map50, color="#0A5C3C", linestyle="--", linewidth=1.5,
-                    label=f"Val best.pt (eval) = {_fmt(best_map50)}")
-    ax1.axhline(test_metrics["mAP50"], color=C_TEST, linestyle="--", linewidth=1.5,
-                label=f"Test = {_fmt(test_metrics['mAP50'])}")
-    ax1.axhline(custom_metrics["mAP50"], color=C_CUSTOM, linestyle="-.", linewidth=1.5,
-                label=f"Custom({custom_name}) = {_fmt(custom_metrics['mAP50'])}")
-    ax1.set_title("mAP50: Val curve / Val·Test·Custom best.pt")
-    ax1.set_xlabel("Epoch"); ax1.set_ylabel("mAP50")
-    ax1.legend(fontsize=7); ax1.grid(alpha=0.3)
+        ax1.axhline(best_map50, color=C_GRID, linestyle=":", linewidth=1,
+                    label=f"Val best.pt = {_fmt(best_map50)} (class 0)")
+    ax1.set_title("mAP50: Val vs Test"); ax1.set_xlabel("Epoch"); ax1.set_ylabel("mAP50")
+    ax1.legend(fontsize=8); ax1.grid(alpha=0.3)
 
     # ── 2. mAP50-95 ───────────────────────────────────────────
     ax2 = fig.add_subplot(gs[0, 1])
     map95_col = _find_col(cols, _COL_CANDIDATES["mAP50-95"])
     if map95_col:
-        ax2.plot(epochs, df_curve[map95_col], color="#7F77DD", linewidth=1.4,
-                 label="Val mAP50-95 (curve từ CSV)")
+        ax2.plot(epochs, df_curve[map95_col], color="#7F77DD", label="Val mAP50-95 (epoch)")
+    ax2.axhline(test_metrics["mAP50-95"], color=C_TEST, linestyle="--",
+                label=f"Test mAP50-95 = {_fmt(test_metrics['mAP50-95'])} (class 0)")
     best_map95 = val_metrics["mAP50-95"]
     if best_map95:
-        ax2.axhline(best_map95, color="#3A2A9B", linestyle="--", linewidth=1.5,
-                    label=f"Val best.pt (eval) = {_fmt(best_map95)}")
-    ax2.axhline(test_metrics["mAP50-95"], color=C_TEST, linestyle="--", linewidth=1.5,
-                label=f"Test = {_fmt(test_metrics['mAP50-95'])}")
-    ax2.axhline(custom_metrics["mAP50-95"], color=C_CUSTOM, linestyle="-.", linewidth=1.5,
-                label=f"Custom({custom_name}) = {_fmt(custom_metrics['mAP50-95'])}")
-    ax2.set_title("mAP50-95: Val curve / Val·Test·Custom best.pt")
-    ax2.set_xlabel("Epoch"); ax2.set_ylabel("mAP50-95")
-    ax2.legend(fontsize=7); ax2.grid(alpha=0.3)
+        ax2.axhline(best_map95, color=C_GRID, linestyle=":", linewidth=1,
+                    label=f"Val best.pt = {_fmt(best_map95)} (class 0)")
+    ax2.set_title("mAP50-95: Val vs Test"); ax2.set_xlabel("Epoch"); ax2.set_ylabel("mAP50-95")
+    ax2.legend(fontsize=8); ax2.grid(alpha=0.3)
 
     # ── 3. cls_loss ───────────────────────────────────────────
     ax3 = fig.add_subplot(gs[0, 2])
@@ -404,7 +300,7 @@ def plot_comparison(df_curve, val_metrics, test_metrics, custom_metrics, custom_
     if tcls: ax3.plot(epochs, df_curve[tcls], color=C_TRAIN, label="train cls_loss")
     if vcls: ax3.plot(epochs, df_curve[vcls], color=C_TEST,  label="val cls_loss", linestyle="--")
     ax3.set_title("Cls Loss: Train vs Val"); ax3.set_xlabel("Epoch"); ax3.set_ylabel("Loss")
-    ax3.legend(fontsize=7); ax3.grid(alpha=0.3)
+    ax3.legend(fontsize=8); ax3.grid(alpha=0.3)
 
     # ── 4. box_loss ───────────────────────────────────────────
     ax4 = fig.add_subplot(gs[1, 0])
@@ -413,7 +309,7 @@ def plot_comparison(df_curve, val_metrics, test_metrics, custom_metrics, custom_
     if tbox: ax4.plot(epochs, df_curve[tbox], color=C_TRAIN, label="train box_loss")
     if vbox: ax4.plot(epochs, df_curve[vbox], color=C_TEST,  label="val box_loss", linestyle="--")
     ax4.set_title("Box Loss: Train vs Val"); ax4.set_xlabel("Epoch"); ax4.set_ylabel("Loss")
-    ax4.legend(fontsize=7); ax4.grid(alpha=0.3)
+    ax4.legend(fontsize=8); ax4.grid(alpha=0.3)
 
     # ── 5. dfl_loss ───────────────────────────────────────────
     ax5 = fig.add_subplot(gs[1, 1])
@@ -422,35 +318,32 @@ def plot_comparison(df_curve, val_metrics, test_metrics, custom_metrics, custom_
     if tdfl: ax5.plot(epochs, df_curve[tdfl], color=C_TRAIN, label="train dfl_loss")
     if vdfl: ax5.plot(epochs, df_curve[vdfl], color=C_TEST,  label="val dfl_loss", linestyle="--")
     ax5.set_title("DFL Loss: Train vs Val"); ax5.set_xlabel("Epoch"); ax5.set_ylabel("Loss")
-    ax5.legend(fontsize=7); ax5.grid(alpha=0.3)
+    ax5.legend(fontsize=8); ax5.grid(alpha=0.3)
 
-    # ── 6. Bar chart: Val vs Test vs Custom ───────────────────
+    # ── 6. Bar chart: Val best vs Test ────────────────────────
     ax6 = fig.add_subplot(gs[1, 2])
     metric_names = ["precision", "recall", "mAP50", "mAP50-95"]
-    val_vals    = [val_metrics[m]    or 0 for m in metric_names]
-    test_vals   = [test_metrics[m]   or 0 for m in metric_names]
-    custom_vals = [custom_metrics[m] or 0 for m in metric_names]
+    val_vals  = [val_metrics[m]  or 0 for m in metric_names]
+    test_vals = [test_metrics[m] or 0 for m in metric_names]
 
     x     = range(len(metric_names))
-    width = 0.26
-    bars1 = ax6.bar([i - width for i in x], val_vals,    width,
-                    label="Val (best.pt | class 0)",              color=C_VAL)
-    bars2 = ax6.bar([i          for i in x], test_vals,  width,
-                    label="Test (best.pt | class 0)",             color=C_TEST)
-    bars3 = ax6.bar([i + width  for i in x], custom_vals, width,
-                    label=f"Custom-{custom_name} (best.pt | class 0)", color=C_CUSTOM)
+    width = 0.35
+    bars1 = ax6.bar([i - width/2 for i in x], val_vals,  width,
+                    label="Val  (best.pt | class 0)", color=C_VAL)
+    bars2 = ax6.bar([i + width/2 for i in x], test_vals, width,
+                    label="Test (best.pt | class 0)", color=C_TEST)
 
     # Ghi số lên đầu cột
-    for bar in list(bars1) + list(bars2) + list(bars3):
+    for bar in bars1 + bars2:
         h = bar.get_height()
         ax6.text(bar.get_x() + bar.get_width() / 2, h + 0.005,
-                 f"{h:.3f}", ha="center", va="bottom", fontsize=6.5)
+                 f"{h:.3f}", ha="center", va="bottom", fontsize=7)
 
     ax6.set_xticks(list(x))
-    ax6.set_xticklabels(metric_names, fontsize=8)
-    ax6.set_title(f"Val vs Test vs Custom-{custom_name} (class 0)")
-    ax6.set_ylim(0, 1.15)
-    ax6.legend(fontsize=7)
+    ax6.set_xticklabels(metric_names, fontsize=9)
+    ax6.set_title("Nghiệm thu: Val vs Test (class 0 only)")
+    ax6.set_ylim(0, 1.12)
+    ax6.legend(fontsize=8)
     ax6.grid(axis="y", alpha=0.3)
 
     # Lưu file
@@ -472,7 +365,7 @@ def main():
         print("Đã huỷ — không có file nào được chọn.")
         sys.exit(0)
 
-    best_pt, results_csv, custom_folder, output_dir = paths
+    best_pt, results_csv, output_dir = paths
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Bước 1a: Eval VAL set — best.pt, chỉ class 0 (số liệu nghiệm thu)
@@ -481,17 +374,14 @@ def main():
     # Bước 1b: Eval TEST set — best.pt, chỉ class 0 (số liệu nghiệm thu)
     test_metrics = run_test_eval(best_pt, DATA_YAML, output_dir)
 
-    # Bước 1c: Eval CUSTOM FOLDER — best.pt, chỉ class 0
-    custom_metrics = run_custom_eval(best_pt, custom_folder, output_dir)
-
     # Bước 2: Đọc training log (dùng để vẽ đường cong overfitting)
     train_val_summary, df_curve = load_train_val_summary(results_csv)
 
-    # Bước 3: Bảng so sánh Val vs Test vs Custom (class 0 only)
-    build_comparison_table(val_metrics, test_metrics, custom_metrics, custom_folder, output_dir)
+    # Bước 3: Bảng so sánh Val vs Test (class 0 only)
+    build_comparison_table(val_metrics, test_metrics, output_dir)
 
     # Bước 4: Biểu đồ
-    plot_comparison(df_curve, val_metrics, test_metrics, custom_metrics, custom_folder, output_dir)
+    plot_comparison(df_curve, val_metrics, test_metrics, output_dir)
 
     # Thông báo hoàn tất
     root = _make_root()
@@ -501,10 +391,8 @@ def main():
         f"Kết quả lưu tại:\n{output_dir}\n\n"
         f"  • val_metrics_class0.json\n"
         f"  • test_metrics_class0.json\n"
-        f"  • custom_metrics_class0.json\n"
         f"  • comparison_summary.csv\n"
-        f"  • comparison_charts.png\n"
-        f"  • data_custom_temp.yaml",
+        f"  • comparison_charts.png",
     )
     root.destroy()
 

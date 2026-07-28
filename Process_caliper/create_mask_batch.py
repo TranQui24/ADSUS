@@ -5,7 +5,7 @@ import argparse
 from pathlib import Path
 
 
-def yolo_to_binary_mask(yolo_lines, img_width, img_height, target_class=1):
+def yolo_to_binary_mask(yolo_lines, img_width, img_height, target_class=0):
     """
     Chuyển đổi các dòng YOLO format sang binary mask.
     Chỉ xử lý các bbox có class == target_class.
@@ -61,7 +61,7 @@ def process_batch(
     label_folder: str,
     image_folder: str,
     output_folder: str,
-    target_class: int = 1,
+    target_class: int = 0,
     output_ext: str = ".png",
 ):
     label_dir  = Path(label_folder)
@@ -156,4 +156,4 @@ if __name__ == "__main__":
     print(f"  Images : {image_folder}")
     print(f"  Output : {output_folder}\n")
 
-    process_batch(label_folder, image_folder, output_folder, target_class=1, output_ext=".png")
+    process_batch(label_folder, image_folder, output_folder, target_class=0, output_ext=".png")

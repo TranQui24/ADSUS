@@ -1,0 +1,19 @@
+# test_backbone.yaml — test EfficientNetV2-S backbone + Neck tối giản
+nc: 1  # tạm để 1 class cho test, sẽ đổi lại đúng số class thật sau
+
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, TorchVision, [1280, "efficientnet_v2_s", "DEFAULT", True, 3, True]]  # 0
+  - [0, 1, Index, [64, 4]]     # 1: P3, stride 8
+  - [0, 1, Index, [160, 6]]    # 2: P4, stride 16
+  - [0, 1, Index, [256, 7]]    # 3: P5, stride 32
+
+head:
+  - [-1, 1, Conv, [256, 1, 1]]              # 4: giảm channel P5 để test nối
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]  # 5
+  - [[-1, 2], 1, Concat, [1]]                # 6: nối với P4 (layer 2)
+  - [-1, 1, Conv, [160, 1, 1]]               # 7
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]  # 8
+  - [[-1, 1], 1, Concat, [1]]                # 9: nối với P3 (layer 1)
+  - [-1, 1, Conv, [64, 3, 1]]                # 10
+  - [[10, 7, 4], 1, Detect, [nc]]            # 11: Detect head, nhận 3 scale
