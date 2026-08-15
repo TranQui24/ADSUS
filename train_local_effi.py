@@ -34,7 +34,7 @@ def main():
     model.train(
         data="data.yaml",
         project=os.path.join(data_base_dir, "ADSUS"),
-        name="YOLO26_EffNetV2S_512",
+        name="YOLO26_EffNetV2S_512_40H1_nbl",
         epochs=200,
         batch=4,
         nbs=16,          
@@ -46,6 +46,7 @@ def main():
         amp=True,         
         patience=50,
         cls=1.0,
+        conf=0.15,
         weight_decay=0.001,
         label_smoothing=0.1,     
         degrees=15.0,
